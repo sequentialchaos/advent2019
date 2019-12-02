@@ -47,8 +47,8 @@ function part2() {
 		for (let verb = 0; verb < 100; verb++) {
 			input02[1] = noun
 			input02[2] = verb
-			let result = evaluateProgram(input02)[0]
-			if (result == goalOutput) {
+			let output = evaluateProgram(input02)[0]
+			if (output == goalOutput) {
 				print(
 					`part 2\n~ the noun ${noun} and verb ${verb} together produce an output of ${goalOutput}\n~ 100 * noun * verb = 100 * ${noun} + ${verb} = ${100 *
 						noun +
