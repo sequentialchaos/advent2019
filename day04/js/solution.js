@@ -1,10 +1,12 @@
 function setup() {
 	noCanvas()
+
 	let start = 356261
 	let end = 846303
 
 	print(`part 1: ${part1(start, end)}`)
 	print(`part 2: ${part2(start, end)}`)
+
 	// testPart1()
 	// testPart2()
 }
