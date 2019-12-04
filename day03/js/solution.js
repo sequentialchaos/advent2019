@@ -4,16 +4,89 @@ function preload() {
 	rawinput03 = loadStrings('input.txt')
 }
 
+let a = 0
+let b = 0
+let pathA, pathB
+let capturer
+
 function setup() {
-	noCanvas()
+	createCanvas(600, 600)
+	background(0.2)
+	colorMode(HSB, 1, 1, 1, 1)
+	// noStroke()
 
 	input03 = parseInput(rawinput03)
 
-	print(`part 1 solution: ${part1(input03)}`)
-	print(`part 2 solution: ${part2(input03)}`)
+	// print(`part 1 solution: ${part1(input03)}`)
+	// print(`part 2 solution: ${part2(input03)}`)
 
 	// testPart1()
 	// testPart2()
+
+	pathA = computePath(input03[0])
+	pathB = computePath(input03[1])
+	bothPaths = pathA.concat(pathB)
+	const boundingBox = getBoundingBox(pathA.concat(pathB))
+	intersections = findIntersections(pathA, pathB)
+
+	frameRate(60)
+	record = true
+	if (record) {
+		capturer = new CCapture({
+			framerate: 60,
+			format: 'gif',
+			workersPath: '../../lib/',
+			verbose: true
+		})
+		capturer.start()
+	}
+}
+
+function draw() {
+	translate(width * 0.5, height * 0.5)
+	scale(0.045)
+	for (let i = 0; i < 200; i++) {
+		if (a < pathA.length) {
+			pointA = pathA[a]
+			stroke(0, 0, 0, 0.01)
+			fill(0, 1, 1, 0.01)
+			circle(pointA.x / 2, pointA.y / 2, 40)
+			a++
+		}
+		if (b < pathB.length) {
+			pointB = pathB[b]
+			stroke(0, 0, 0, 0.01)
+			fill(0.3, 1, 1, 0.01)
+			circle(pointB.x / 2, pointB.y / 2, 40)
+			for (let intersection of intersections) {
+				if (pointB.x == intersection.x && pointB.y == intersection.y) {
+					fill(0.5, 0, 1, 0.6)
+					circle(pointB.x / 2, pointB.y / 2, 100)
+				}
+			}
+			b++
+		}
+	}
+	if (record) {
+		capturer.capture(canvas)
+		if (a >= pathA.length && b >= pathB.length) {
+			capturer.stop()
+			capturer.save()
+
+			noLoop()
+		}
+	}
+}
+
+function getBoundingBox(path) {
+	let [ minX, minY, maxX, maxY ] = [ 0, 0, 0, 0 ]
+	for (let p of path) {
+		minX = p.x < minX ? p.x : minX
+		minY = p.y < minY ? p.y : minY
+		maxX = p.x > maxX ? p.x : maxX
+		maxY = p.x > maxY ? p.x : maxY
+	}
+	return { minX, minY, maxX, maxY }
 }
 
 function parseInput(rawinput) {
