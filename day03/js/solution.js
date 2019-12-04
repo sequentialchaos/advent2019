@@ -9,8 +9,11 @@ function setup() {
 
 	input03 = parseInput(rawinput03)
 
-	part1()
-	part2()
+	print(`part 1 solution: ${part1(input03)}`)
+	print(`part 2 solution: ${part2(input03)}`)
+
+	// testPart1()
+	// testPart2()
 }
 
 function parseInput(rawinput) {
@@ -98,46 +101,49 @@ function manhattanDistance(pointA, pointB) {
 	return Math.abs(pointA.x - pointB.x) + Math.abs(pointA.y - pointB.y)
 }
 
-function part1() {
-	const [ pathA, pathB ] = input03.map((instructions) => computePath(instructions))
+function part1(input) {
+	const [ pathA, pathB ] = input.map((instructions) => computePath(instructions))
 	const startingPoint = { x: 0, y: 0 }
 	const intersections = findIntersections(pathA, pathB)
 	const manhattanDistances = intersections.map((intersection) => {
 		return manhattanDistance(startingPoint, intersection)
 	})
-	print(min(manhattanDistances))
+	return min(manhattanDistances)
 }
 
-function part2() {
-	const [ pathA, pathB ] = input03.map((instructions) => computePath(instructions))
+function part2(input) {
+	const [ pathA, pathB ] = input.map((instructions) => computePath(instructions))
 	const intersections = findIntersectionsWithDelay(pathA, pathB)
 	const signalDelays = intersections.map((intersection) => {
 		return intersection.delay
 	})
-	print(min(signalDelays))
+	return min(signalDelays)
 }
 
 function testPart1() {
-	let testPrograms = [
-		[ 1, 0, 0, 0, 99 ],
-		[ 2, 3, 0, 3, 99 ],
-		[ 2, 4, 4, 5, 99, 0 ],
-		[ 1, 1, 1, 4, 99, 5, 6, 0, 99 ]
+	let testInputs = [
+		[ 'R75,D30,R83,U83,L12,D49,R71,U7,L72', 'U62,R66,U55,R34,D71,R55,D58,R83' ],
+		[ 'R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51', 'U98,R91,D20,R16,D67,R40,U7,R15,U6,R7' ]
 	]
-	let testSolutions = [
-		[ 2, 0, 0, 0, 99 ],
-		[ 2, 3, 0, 6, 99 ],
-		[ 2, 4, 4, 5, 99, 9801 ],
-		[ 30, 1, 1, 4, 2, 5, 6, 0, 99 ]
-	]
-	for (let i = 0; i < testPrograms.length; i++) {
-		let program = testPrograms[i]
+	let testSolutions = [ 159, 135 ]
+	for (let i = 0; i < testInputs.length; i++) {
+		let input = parseInput(testInputs[i])
 		let solution = testSolutions[i]
-		let result = evaluateProgram(program)
-		print(program, solution, result)
+		let output = part1(input)
+		print(solution, output)
 	}
 }
 
 function testPart2() {
-	return
+	let testInputs = [
+		[ 'R75,D30,R83,U83,L12,D49,R71,U7,L72', 'U62,R66,U55,R34,D71,R55,D58,R83' ],
+		[ 'R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51', 'U98,R91,D20,R16,D67,R40,U7,R15,U6,R7' ]
+	]
+	let testSolutions = [ 610, 410 ]
+	for (let i = 0; i < testInputs.length; i++) {
+		let input = parseInput(testInputs[i])
+		let solution = testSolutions[i]
+		let output = part2(input)
+		print(solution, output)
+	}
 }
