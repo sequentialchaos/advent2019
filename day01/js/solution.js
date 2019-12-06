@@ -1,7 +1,7 @@
 let rawinput01, input01
 
 function preload() {
-	rawinput01 = loadStrings('input.txt')
+	rawinput01 = loadStrings('../input.txt')
 }
 
 function setup() {

@@ -1,5 +1,6 @@
+import sys
 
-with open("input.txt") as f:
+with open(sys.argv[1]) as f:
   input01 = list(map(int, f.readlines()))
 
 # PART 1
