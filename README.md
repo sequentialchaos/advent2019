@@ -7,3 +7,4 @@
 | [04](https://adventofcode.com/2019/day/4) | [javascript](https://github.com/sequentialchaos/advent2019/blob/master/day04/js/solution.js?ts=2) |
 | [05](https://adventofcode.com/2019/day/5) | [javascript](https://github.com/sequentialchaos/advent2019/blob/master/day05/js/solution.js?ts=2), [python](https://github.com/sequentialchaos/advent2019/blob/master/day05/python/solution.py?ts=2) |
 | [06](https://adventofcode.com/2019/day/6) | [javascript](https://github.com/sequentialchaos/advent2019/blob/master/day06/js/solution.js?ts=2) |
+| [07](https://adventofcode.com/2019/day/7) | [javascript](https://github.com/sequentialchaos/advent2019/blob/master/day07/js/solution.js?ts=2) |
